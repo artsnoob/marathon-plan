@@ -90,6 +90,24 @@
   .rule b{display:block;margin-bottom:4px;font-size:14px;}
   footer{text-align:center;color:var(--muted);font-size:12px;margin-top:40px;}
   .hint{text-align:center;color:var(--muted);font-size:12px;margin:8px 0 4px;}
+
+  /* Mobile: stop the weekly-distance bar from colliding with the LR column.
+     Give the volume bar its own full-width row beneath W# / title / LR. */
+  @media (max-width:560px){
+    body{padding:24px 14px 64px;}
+    .wkrow{
+      grid-template-columns:42px 1fr auto;
+      grid-template-areas:
+        "num title lr"
+        "bar bar   bar";
+      row-gap:8px;column-gap:10px;
+    }
+    .wkrow > :nth-child(1){grid-area:num;}
+    .wkrow > :nth-child(2){grid-area:title;}
+    .wkrow > :nth-child(3){grid-area:bar;}   /* bar-track spans full width */
+    .wkrow > :nth-child(4){grid-area:lr;justify-self:end;}
+    .detail{overflow-x:auto;}                /* day table never overflows the card */
+  }
 </style>
 </head>
 <body>
