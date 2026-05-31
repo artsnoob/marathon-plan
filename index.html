@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Hague Marathon — Sub-4:00 Training Plan</title>
+<style>
+  :root{
+    --bg:#0e1116; --panel:#161b22; --panel2:#1c232d; --line:#2a323d;
+    --txt:#e6edf3; --muted:#8b97a6; --accent:#ff6b35;
+    --base:#3fb950; --build:#58a6ff; --peak:#d29922; --taper:#bc8cff; --race:#f85149;
+    --quality:#ffb454;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);color:var(--txt);line-height:1.5;padding:32px 20px 80px;}
+  .wrap{max-width:1080px;margin:0 auto;}
+
+  /* Header */
+  header{text-align:center;margin-bottom:32px;}
+  .kicker{color:var(--accent);font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:13px;}
+  h1{font-size:34px;margin:6px 0 4px;font-weight:800;}
+  .sub{color:var(--muted);font-size:15px;}
+  .countdown{display:inline-flex;gap:18px;margin-top:20px;background:var(--panel);border:1px solid var(--line);
+    border-radius:14px;padding:16px 28px;}
+  .countdown .num{font-size:30px;font-weight:800;color:var(--accent);line-height:1;}
+  .countdown .lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:4px;}
+
+  /* Stat cards */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:28px 0;}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;}
+  .card .v{font-size:22px;font-weight:800;}
+  .card .k{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-top:4px;}
+
+  h2{font-size:20px;margin:36px 0 14px;display:flex;align-items:center;gap:10px;}
+  h2::before{content:"";width:4px;height:20px;background:var(--accent);border-radius:2px;}
+
+  /* Paces table */
+  table{width:100%;border-collapse:collapse;background:var(--panel);border-radius:12px;overflow:hidden;}
+  th,td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--line);font-size:14px;}
+  th{background:var(--panel2);color:var(--muted);text-transform:uppercase;font-size:11px;letter-spacing:.5px;}
+  tr:last-child td{border-bottom:none;}
+  .pace-hi{color:var(--quality);font-weight:700;}
+
+  /* Phase legend */
+  .legend{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0;}
+  .chip{display:inline-flex;align-items:center;gap:7px;font-size:13px;background:var(--panel);
+    border:1px solid var(--line);padding:6px 12px;border-radius:20px;}
+  .dot{width:11px;height:11px;border-radius:50%;}
+  .d-base{background:var(--base)} .d-build{background:var(--build)}
+  .d-peak{background:var(--peak)} .d-taper{background:var(--taper)} .d-race{background:var(--race)}
+
+  /* Volume bars */
+  .weeks{display:flex;flex-direction:column;gap:6px;margin-top:6px;}
+  .wkrow{display:grid;grid-template-columns:48px 110px 1fr auto;align-items:center;gap:12px;
+    background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:8px 14px;cursor:pointer;
+    transition:background .12s;}
+  .wkrow:hover{background:var(--panel2);}
+  .wkrow.open{background:var(--panel2);}
+  .wknum{font-weight:800;font-size:15px;}
+  .wktitle{font-size:13px;}
+  .wkdates{font-size:11px;color:var(--muted);}
+  .bar-track{background:var(--bg);border-radius:6px;height:22px;position:relative;overflow:hidden;}
+  .bar-fill{height:100%;border-radius:6px;display:flex;align-items:center;justify-content:flex-end;
+    padding-right:8px;font-size:11px;font-weight:700;color:#0e1116;min-width:34px;}
+  .b-base{background:var(--base)} .b-build{background:var(--build)}
+  .b-peak{background:var(--peak)} .b-taper{background:var(--taper)} .b-race{background:var(--race)}
+  .lr{font-size:12px;color:var(--muted);white-space:nowrap;}
+  .lr b{color:var(--txt);}
+
+  /* Detail panel */
+  .detail{display:none;background:var(--panel);border:1px solid var(--line);border-top:none;
+    border-radius:0 0 10px 10px;margin-top:-6px;margin-bottom:2px;padding:4px 14px 12px;}
+  .detail.show{display:block;}
+  .detail table{margin-top:8px;background:transparent;}
+  .detail th{background:transparent;}
+  .detail td{font-size:13px;}
+  .badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:5px;
+    text-transform:uppercase;letter-spacing:.5px;}
+  .bg-q{background:rgba(255,180,84,.18);color:var(--quality);}
+  .bg-lr{background:rgba(63,185,80,.15);color:var(--base);}
+  .bg-rest{background:rgba(139,151,166,.15);color:var(--muted);}
+  .bg-race{background:rgba(248,81,73,.18);color:var(--race);}
+  .note{font-size:12.5px;color:var(--muted);margin-top:10px;padding:10px;background:var(--bg);
+    border-radius:8px;border-left:3px solid var(--accent);}
+
+  /* Rules */
+  .rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;}
+  .rule{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px;font-size:13px;}
+  .rule b{display:block;margin-bottom:4px;font-size:14px;}
+  footer{text-align:center;color:var(--muted);font-size:12px;margin-top:40px;}
+  .hint{text-align:center;color:var(--muted);font-size:12px;margin:8px 0 4px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="kicker">🏁 Goal Race · 5:41/km</div>
+    <h1>The Hague Marathon — Sub-4:00</h1>
+    <div class="sub">Sunday, 1 November 2026 · 20-week plan (v4) · 15 Jun → 1 Nov 2026</div>
+    <div class="countdown">
+      <div><div class="num" id="cd-days">—</div><div class="lbl">Days to race</div></div>
+      <div><div class="num" id="cd-plan">—</div><div class="lbl">Days to W1 start</div></div>
+    </div>
+  </header>
+
+  <div class="stats">
+    <div class="card"><div class="v">42.2 km</div><div class="k">Race distance</div></div>
+    <div class="card"><div class="v">4:00:00</div><div class="k">Goal time</div></div>
+    <div class="card"><div class="v">72 km</div><div class="k">Peak week (W15)</div></div>
+    <div class="card"><div class="v">~54 km</div><div class="k">Weekly average</div></div>
+    <div class="card"><div class="v">6 days</div><div class="k">Run frequency</div></div>
+    <div class="card"><div class="v">4:07</div><div class="k">Current Garmin pred.</div></div>
+  </div>
+
+  <h2>Goal Paces</h2>
+  <table>
+    <tr><th>Type</th><th>Pace /km</th><th>Pace /mi</th><th>Notes</th></tr>
+    <tr><td><b>Marathon (goal)</b></td><td class="pace-hi">5:41</td><td>9:09</td><td>Must feel automatic</td></tr>
+    <tr><td>Easy</td><td>7:10</td><td>11:32</td><td>HR-capped true Z2 (≤147 bpm)</td></tr>
+    <tr><td>Long Run</td><td>7:10</td><td>11:32</td><td>Conversational</td></tr>
+    <tr><td>Recovery jog</td><td>7:30–8:00</td><td>12:04–12:52</td><td>Shuffle pace, readiness-gated</td></tr>
+    <tr><td><b>Tempo</b></td><td class="pace-hi">5:15</td><td>8:27</td><td>Just under HM effort</td></tr>
+    <tr><td>Speed (5–10K)</td><td>4:30</td><td>7:14</td><td>Intervals</td></tr>
+  </table>
+  <p class="hint">Garmin calibration: VO2 max 46.8 · 5K 20:46 · 10K 47:00 · HM 1:49:10 · Marathon 4:07</p>
+
+  <h2>Weekly Build</h2>
+  <div class="legend">
+    <span class="chip"><span class="dot d-base"></span>Base (W1–8)</span>
+    <span class="chip"><span class="dot d-build"></span>Build (W9–14)</span>
+    <span class="chip"><span class="dot d-peak"></span>Peak (W15–17)</span>
+    <span class="chip"><span class="dot d-taper"></span>Taper (W18–20)</span>
+    <span class="chip"><span class="dot d-race"></span>Race</span>
+  </div>
+  <p class="hint">Click any week to expand the daily schedule ↓</p>
+  <div class="weeks" id="weeks"></div>
+
+  <h2>Key Coaching Rules (v4)</h2>
+  <div class="rules">
+    <div class="rule"><b>🛌 One true rest day</b>Friday = full rest. No running, strength, bouldering or padel. The single most important v4 change.</div>
+    <div class="rule"><b>🐢 Easy means easy</b>HR-capped at true Z2 (≤147 bpm) ≈ 7:10/km. If pace & HR disagree, obey HR and slow down.</div>
+    <div class="rule"><b>📟 Readiness-gated quality</b>2 consecutive POOR mornings → next quality session becomes easy. Sunday jog: PRIME/High run it, Low/POOR walk or skip.</div>
+    <div class="rule"><b>💪 Strength 2×/week</b>Throughout (gym or kettlebell.md). Slot Mon+Thu off quality days. Never Friday. Submaximal in peak weeks, skip race week.</div>
+    <div class="rule"><b>🧗 Bouldering 1×/week</b>Wednesday. Low-impact. First thing cut on a low-readiness week; dropped for W14 HM & taper.</div>
+    <div class="rule"><b>🚶 Taper life-load too</b>NEAT is a training variable. Cut 20–40k-step days in peak & race weeks — a 30k-step "rest" day is not rest.</div>
+    <div class="rule"><b>🍝 Race nutrition</b>Gel every 40–45 min. Practice on every long run. Nothing new on race day.</div>
+    <div class="rule"><b>📉 Negative split</b>Start 10–15 sec/km slower than goal for the first 6 km. Run the second half faster.</div>
+    <div class="rule"><b>🛑 Stop signs</b>2 nights poor sleep + elevated RHR + soreness past 48 hrs → extra rest day. The plan is a guide, not a contract.</div>
+  </div>
+
+  <footer>Generated from <code>marathon_4hr_20wk_plan.md</code> (v4) · The Hague Marathon, 1 Nov 2026</footer>
+</div>
+
+<script>
+// ---- Countdown ----
+(function(){
+  var race = new Date(2026,10,1);   // 1 Nov 2026
+  var w1   = new Date(2026,5,15);   // 15 Jun 2026
+  var now  = new Date(); now.setHours(0,0,0,0);
+  var day = 86400000;
+  document.getElementById('cd-days').textContent  = Math.max(0, Math.round((race-now)/day));
+  var p = Math.round((w1-now)/day);
+  document.getElementById('cd-plan').textContent = p > 0 ? p : "started";
+})();
+
+// ---- Week data ----
+var maxVol = 72;
+var weeks = [
+ {n:1,ph:'base',t:'Pre-Base',d:'15–21 Jun',v:40,lr:'15 km',
+  days:[['Mon','Easy','7 km','7:10'],['Tue','Easy','6 km','7:10'],['Wed','Easy','5 km','7:10'],['Thu','Easy','7 km','7:10'],['Fri','Rest','—','—'],['Sat','Long Run','15 km','7:10'],['Sun','Rest','—','—']],
+  note:'Start at roughly current running volume. All runs fully conversational.'},
+ {n:2,ph:'base',t:'Base Foundation',d:'22–28 Jun',v:44,lr:'17 km',
+  days:[['Mon','Easy','7 km','7:10'],['Tue','Easy','6 km','7:10'],['Wed','Easy','6 km','7:10'],['Thu','Easy','8 km','7:10'],['Fri','Rest','—','—'],['Sat','Long Run','17 km','7:10'],['Sun','Rest','—','—']],
+  note:'Consistency is the only job. Show up, run easy, recover well.'},
+ {n:3,ph:'base',t:'Aerobic Build',d:'29 Jun–5 Jul',v:48,lr:'17 km',
+  days:[['Mon','Easy','8 km','7:10'],['Tue','Easy','6 km','7:10'],['Wed','Easy','7 km','7:10'],['Thu','Easy','10 km','7:10'],['Fri','Rest','—','—'],['Sat','Long Run','17 km','7:10'],['Sun','Rest','—','—']],
+  note:'Long run held at 17 km — second exposure before the recovery week.'},
+ {n:4,ph:'base',t:'Recovery',d:'6–12 Jul',v:38,lr:'14 km',
+  days:[['Mon','Easy','6 km','7:10'],['Tue','Easy','5 km','7:10'],['Wed','Easy','5 km','7:10'],['Thu','Easy','8 km','7:10'],['Fri','Rest','—','—'],['Sat','Long Run','14 km','7:10'],['Sun','Rest','—','—']],
+  note:'First planned recovery. Volume drops ~20%. Down weeks prevent injury.'},
+ {n:5,ph:'base',t:'Foundation',d:'13–19 Jul',v:50,lr:'18 km',
+  days:[['Mon','Easy','8 km','7:10'],['Tue','Easy','7 km','7:10'],['Wed','Easy','6 km','7:10'],['Thu','Easy','7 km','7:10'],['Fri','Rest','—','—'],['Sat','Long Run','18 km','7:10'],['Sun','Recovery jog','4 km','7:30–8:00']],
+  note:'Sunday recovery jog begins. Keep it shuffle-pace — easier than easy.'},
+ {n:6,ph:'base',t:'Settling In',d:'20–26 Jul',v:54,lr:'19 km',
+  days:[['Mon','Easy','9 km','7:10'],['Tue','Easy','7 km','7:10'],['Wed','Easy','7 km','7:10'],['Thu','Easy','8 km','7:10'],['Fri','Rest','—','—'],['Sat','Long Run','19 km','7:10'],['Sun','Recovery jog','4 km','7:30–8:00']],
+  note:'Body adapts. Prioritize 7–9 hrs sleep.'},
+ {n:7,ph:'base',t:'Pure Aerobic',d:'27 Jul–2 Aug',v:56,lr:'20 km',
+  days:[['Mon','Easy','9 km','7:10'],['Tue','Easy','8 km','7:10'],['Wed','Easy','7 km','7:10'],['Thu','Easy','9 km','7:10'],['Fri','Rest','—','—'],['Sat','Long Run','20 km','7:10'],['Sun','Recovery jog','3 km','7:30–8:00']],
+  note:'Still pure aerobic — no quality yet. Practice race-day gel strategy on the long run.'},
+ {n:8,ph:'base',t:'Recovery',d:'3–9 Aug',v:44,lr:'16 km',
+  days:[['Mon','Easy','7 km','7:10'],['Tue','Easy','6 km','7:10'],['Wed','Easy','6 km','7:10'],['Thu','Easy','6 km','7:10'],['Fri','Rest','—','—'],['Sat','Long Run','16 km','7:10'],['Sun','Recovery jog','3 km','7:30–8:00']],
+  note:'Planned down week — volume drops ~21%. Adaptation happens during rest.'},
+ {n:9,ph:'build',t:'First Tempo',d:'10–16 Aug',v:58,lr:'20 km',
+  days:[['Mon','Easy','9 km','7:10'],['Tue','Easy','8 km','7:10'],['Wed','Tempo','8 km (2wu+4T+2cd)','5:15 T'],['Thu','Easy','7 km','7:10'],['Fri','Rest','—','—'],['Sat','Long Run','20 km','7:10'],['Sun','Recovery jog','6 km','7:30–8:00']],
+  note:'First tempo. Comfortably hard, near HM effort — faster than marathon pace.'},
+ {n:10,ph:'build',t:'MP Work + Speed Intro',d:'17–23 Aug',v:62,lr:'22 km (4 MP)',
+  days:[['Mon','Easy','9 km','7:10'],['Tue','Speed','8 km (5×1000m)','4:30'],['Wed','Easy','8 km','7:10'],['Thu','Easy','8 km','7:10'],['Fri','Rest','—','—'],['Sat','LR + MP finish','22 km (18E+4MP)','7:10→5:41'],['Sun','Recovery jog','7 km','very easy']],
+  note:'First marathon-pace exposure — 4 km at the end of the LR. Learn how 5:41/km feels on tired legs.'},
+ {n:11,ph:'build',t:'Volume Climbs',d:'24–30 Aug',v:66,lr:'24 km',
+  days:[['Mon','Easy','11 km','7:10'],['Tue','Easy','7 km','7:10'],['Wed','Easy','8 km','7:10'],['Thu','Tempo','10 km (2wu+6T+2cd)','5:15'],['Fri','Rest','—','—'],['Sat','Long Run','24 km','7:10'],['Sun','Recovery jog','6 km','7:30–8:00']],
+  note:'One quality session this week (tempo) — not two. Keep easy days truly easy.'},
+ {n:12,ph:'build',t:'Recovery',d:'31 Aug–6 Sep',v:52,lr:'18 km',
+  days:[['Mon','Easy','8 km','7:10'],['Tue','Easy','6 km','7:10'],['Wed','Easy','6 km','7:10'],['Thu','Easy','7 km','7:10'],['Fri','Rest','—','—'],['Sat','Long Run','18 km','7:10'],['Sun','Recovery jog','7 km','7:30–8:00']],
+  note:'Second down week. Honor the rest — adaptation is happening. Aim for 8+ hrs/night.'},
+ {n:13,ph:'build',t:'Peak Building',d:'7–13 Sep',v:68,lr:'26 km (6 MP)',
+  days:[['Mon','Easy','10 km','7:10'],['Tue','Speed','8 km (4×1200m)','4:30'],['Wed','Easy','9 km','7:10'],['Thu','Easy','8 km','7:10'],['Fri','Rest','—','—'],['Sat','LR + MP finish','26 km (20E+6MP)','7:10→5:41'],['Sun','Recovery jog','7 km','7:30–8:00']],
+  note:'Speed Tue, MP block in LR Sat — no third quality day. Never run 20+ km fasted.'},
+ {n:14,ph:'build',t:'Half-Marathon Tune-Up 🏃',d:'14–20 Sep',v:60,lr:'21.1 race',
+  days:[['Mon','Easy','11 km','7:10'],['Tue','Easy','9 km','7:10'],['Wed','Easy + strides','10 km (8E+6×100m)','7:10'],['Thu','Easy','6 km','7:10'],['Fri','Rest','—','—'],['Sat','HALF MARATHON RACE','21.1 km','5:24 target'],['Sun','Recovery jog','3 km','7:30–8:00']],
+  note:'Sub-4 diagnostic. Target 5:24/km (1:54 HM ≈ 4:00 marathon). If it feels easy, sub-4 is on. If you struggle to break 1:57, recalibrate to 4:05. Same gels & shoes as race day.'},
+ {n:15,ph:'peak',t:'Highest Mileage ⭐',d:'21–27 Sep',v:72,lr:'30 km (12 MP)',
+  days:[['Mon','Easy','11 km','7:10'],['Tue','Easy','7 km','7:10'],['Wed','Easy','9 km','7:10'],['Thu','Tempo','10 km (2wu+6T+2cd)','5:15'],['Fri','Rest','—','—'],['Sat','Recovery jog','5 km','7:30–8:00'],['Sun','LR + MP block','30 km (18E+12MP)','7:10→5:41']],
+  note:'Peak week. LR on Sunday gives 8 days recovery from the W14 half. The 12 km MP block inside 30 km is the marathon-specific peak workout. Nail this and sub-4 is on.'},
+ {n:16,ph:'peak',t:'Recovery',d:'28 Sep–4 Oct',v:58,lr:'22 km',
+  days:[['Mon','Recovery jog','5 km','7:30–8:00'],['Tue','Easy','9 km','7:10'],['Wed','Easy','8 km','7:10'],['Thu','Easy','8 km','7:10'],['Fri','Rest','—','—'],['Sat','Long Run','22 km','7:10'],['Sun','Recovery jog','6 km','7:30–8:00']],
+  note:'Recovery after peak. Mon is a true recovery jog after Sunday\'s 30 km. Do NOT skip the down week.'},
+ {n:17,ph:'peak',t:'Final Peak',d:'5–11 Oct',v:70,lr:'30 km (12 MP)',
+  days:[['Mon','Easy','10 km','7:10'],['Tue','Easy','7 km','7:10'],['Wed','Easy','8 km','7:10'],['Thu','Tempo','11 km (2wu+7T+2cd)','5:15'],['Fri','Rest','—','—'],['Sat','LR finish at MP','30 km (18E+12MP)','7:10→5:41'],['Sun','Recovery jog','4 km','7:30–8:00']],
+  note:'Last hard week. Race-simulation LR — the closing 12 km at MP rehearses the back half. Full nutrition rehearsal.'},
+ {n:18,ph:'taper',t:'Taper Begins',d:'12–18 Oct',v:56,lr:'20 km',
+  days:[['Mon','Easy','8 km','7:10'],['Tue','Speed','7 km (5×800m)','4:30'],['Wed','Easy','8 km','7:10'],['Thu','Easy','8 km','7:10'],['Fri','Rest','—','—'],['Sat','Long Run','20 km','7:10'],['Sun','Recovery jog','5 km','7:30–8:00']],
+  note:'Taper week 1. Volume drops 20%. Taper madness is real and normal — trust the process.'},
+ {n:19,ph:'taper',t:'Sharp Taper',d:'19–25 Oct',v:40,lr:'14 km (5 MP)',
+  days:[['Mon','Easy','7 km','7:10'],['Tue','Speed','6 km (4×400m)','4:00'],['Wed','Easy','6 km','7:10'],['Thu','Easy','5 km','7:10'],['Fri','Rest','—','—'],['Sat','MP sharpener','14 km (9E+5MP)','7:10→5:41'],['Sun','Recovery jog','2 km','7:30–8:00']],
+  note:'Volume drops sharply. Short MP block keeps legs sharp without fatigue. Full carbo-load. Do not add km.'},
+ {n:20,ph:'race',t:'Race Week 🏁',d:'26 Oct–1 Nov',v:57,lr:'42.2 RACE',
+  days:[['Mon','Easy','5 km','7:10'],['Tue','Easy + strides','5 km (4E+4×100m)','7:10'],['Wed','Easy','4 km','7:10'],['Thu','Rest','—','—'],['Fri','Easy shakeout','3 km','7:10'],['Sat','Pre-race walk + strides','2 km + 4×100m','7:10'],['Sun','🏁 RACE — The Hague Marathon','42.2 km','5:41']],
+  note:'Race day: km 1–6 @ 5:50–5:55 (bank patience), km 6–32 @ 5:41, km 32–42 hold or negative split. Gel every 40 min from km 8. Drink at every aid station. Trust your training.'}
+];
+
+function dayBadge(type){
+  var t = type.toLowerCase();
+  if(t.indexOf('race')>=0) return 'bg-race';
+  if(t.indexOf('rest')>=0) return 'bg-rest';
+  if(t.indexOf('tempo')>=0||t.indexOf('speed')>=0||t.indexOf('mp')>=0||t.indexOf('half')>=0) return 'bg-q';
+  if(t.indexOf('long')>=0||t.indexOf('lr')>=0) return 'bg-lr';
+  return '';
+}
+
+var container = document.getElementById('weeks');
+weeks.forEach(function(w){
+  var pct = Math.round(w.v/maxVol*100);
+  var row = document.createElement('div');
+  row.className = 'wkrow';
+  row.innerHTML =
+    '<div><div class="wknum">W'+w.n+'</div></div>'+
+    '<div><div class="wktitle">'+w.t+'</div><div class="wkdates">'+w.d+'</div></div>'+
+    '<div class="bar-track"><div class="bar-fill b-'+w.ph+'" style="width:'+pct+'%">'+w.v+'</div></div>'+
+    '<div class="lr">LR <b>'+w.lr+'</b></div>';
+
+  var det = document.createElement('div');
+  det.className = 'detail';
+  var rows = w.days.map(function(d){
+    var b = dayBadge(d[1]);
+    var typeCell = b ? '<span class="badge '+b+'">'+d[1]+'</span>' : d[1];
+    return '<tr><td><b>'+d[0]+'</b></td><td>'+typeCell+'</td><td>'+d[2]+'</td><td>'+d[3]+'</td></tr>';
+  }).join('');
+  det.innerHTML = '<table><tr><th>Day</th><th>Type</th><th>Distance</th><th>Pace</th></tr>'+rows+'</table>'+
+    '<div class="note">'+w.note+'</div>';
+
+  row.addEventListener('click', function(){
+    var open = det.classList.toggle('show');
+    row.classList.toggle('open', open);
+  });
+
+  container.appendChild(row);
+  container.appendChild(det);
+});
+</script>
+</body>
+</html>
