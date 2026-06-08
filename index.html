@@ -127,8 +127,8 @@
     <div class="card"><div class="v">42.2 km</div><div class="k">Race distance</div></div>
     <div class="card"><div class="v">4:00:00</div><div class="k">Goal time</div></div>
     <div class="card"><div class="v">72 km</div><div class="k">Peak week (W15)</div></div>
-    <div class="card"><div class="v">~54 km</div><div class="k">Weekly average</div></div>
-    <div class="card"><div class="v">6 days</div><div class="k">Run frequency</div></div>
+    <div class="card"><div class="v">~51 km</div><div class="k">Weekly average</div></div>
+    <div class="card"><div class="v">5 days</div><div class="k">Run frequency</div></div>
     <div class="card"><div class="v">4:07</div><div class="k">Current Garmin pred.</div></div>
   </div>
 
@@ -159,8 +159,8 @@
   <div class="rules">
     <div class="rule"><b>🛌 One true rest day</b>Friday = full rest. No running, strength, bouldering or padel. The single most important v4 change.</div>
     <div class="rule"><b>🐢 Easy means easy</b>HR-capped at true Z2 (≤147 bpm) ≈ 7:10/km. If pace & HR disagree, obey HR and slow down.</div>
-    <div class="rule"><b>📟 Readiness-gated quality</b>2 consecutive POOR mornings → next quality session becomes easy. Sunday jog: PRIME/High run it, Low/POOR walk or skip.</div>
-    <div class="rule"><b>💪 Strength 2×/week</b>Throughout (gym or kettlebell.md). Slot Mon+Thu off quality days. Never Friday. Submaximal in peak weeks, skip race week.</div>
+    <div class="rule"><b>📟 Readiness-gated quality</b>2 consecutive POOR mornings → next quality session becomes easy. Sunday gym strength: PRIME/High full session, Low/POOR lighter or push to Monday — don't grind heavy legs.</div>
+    <div class="rule"><b>💪 Strength 2×/week</b>Thu (home, lighter legs) + <b>Sun (gym, heavy legs)</b>. Sunday replaces the recovery jog so the lift isn't run-tired — keep it submaximal (still ~18–24h after the long run). Never Friday. Skip race week. Exceptions: W15 & W20 keep their Sunday (long run / race).</div>
     <div class="rule"><b>🧗 Bouldering 1×/week</b>Wednesday. Low-impact. First thing cut on a low-readiness week; dropped for W14 HM & taper.</div>
     <div class="rule"><b>🚶 Taper life-load too</b>NEAT is a training variable. Cut 20–40k-step days in peak & race weeks — a 30k-step "rest" day is not rest.</div>
     <div class="rule"><b>🍝 Race nutrition</b>Gel every 40–45 min. Practice on every long run. Nothing new on race day.</div>
@@ -198,50 +198,50 @@ var weeks = [
  {n:4,ph:'base',t:'Recovery',d:'6–12 Jul',v:38,lr:'14 km',
   days:[['Mon','Easy','6 km','7:10'],['Tue','Easy','5 km','7:10'],['Wed','Easy','5 km','7:10'],['Thu','Easy','8 km','7:10'],['Fri','Rest','—','—'],['Sat','Long Run','14 km','7:10'],['Sun','Rest','—','—']],
   note:'First planned recovery. Volume drops ~20%. Down weeks prevent injury.'},
- {n:5,ph:'base',t:'Foundation',d:'13–19 Jul',v:50,lr:'18 km',
-  days:[['Mon','Easy','8 km','7:10'],['Tue','Easy','7 km','7:10'],['Wed','Easy','6 km','7:10'],['Thu','Easy','7 km','7:10'],['Fri','Rest','—','—'],['Sat','Long Run','18 km','7:10'],['Sun','Recovery jog','4 km','7:30–8:00']],
+ {n:5,ph:'base',t:'Foundation',d:'13–19 Jul',v:46,lr:'18 km',
+  days:[['Mon','Easy','8 km','7:10'],['Tue','Easy','7 km','7:10'],['Wed','Easy','6 km','7:10'],['Thu','Easy','7 km','7:10'],['Fri','Rest','—','—'],['Sat','Long Run','18 km','7:10'],['Sun','Strength (gym)','—','—']],
   note:'Sunday recovery jog begins. Keep it shuffle-pace — easier than easy.'},
- {n:6,ph:'base',t:'Settling In',d:'20–26 Jul',v:54,lr:'19 km',
-  days:[['Mon','Easy','9 km','7:10'],['Tue','Easy','7 km','7:10'],['Wed','Easy','7 km','7:10'],['Thu','Easy','8 km','7:10'],['Fri','Rest','—','—'],['Sat','Long Run','19 km','7:10'],['Sun','Recovery jog','4 km','7:30–8:00']],
+ {n:6,ph:'base',t:'Settling In',d:'20–26 Jul',v:50,lr:'19 km',
+  days:[['Mon','Easy','9 km','7:10'],['Tue','Easy','7 km','7:10'],['Wed','Easy','7 km','7:10'],['Thu','Easy','8 km','7:10'],['Fri','Rest','—','—'],['Sat','Long Run','19 km','7:10'],['Sun','Strength (gym)','—','—']],
   note:'Body adapts. Prioritize 7–9 hrs sleep.'},
- {n:7,ph:'base',t:'Pure Aerobic',d:'27 Jul–2 Aug',v:56,lr:'20 km',
-  days:[['Mon','Easy','9 km','7:10'],['Tue','Easy','8 km','7:10'],['Wed','Easy','7 km','7:10'],['Thu','Easy','9 km','7:10'],['Fri','Rest','—','—'],['Sat','Long Run','20 km','7:10'],['Sun','Recovery jog','3 km','7:30–8:00']],
+ {n:7,ph:'base',t:'Pure Aerobic',d:'27 Jul–2 Aug',v:53,lr:'20 km',
+  days:[['Mon','Easy','9 km','7:10'],['Tue','Easy','8 km','7:10'],['Wed','Easy','7 km','7:10'],['Thu','Easy','9 km','7:10'],['Fri','Rest','—','—'],['Sat','Long Run','20 km','7:10'],['Sun','Strength (gym)','—','—']],
   note:'Still pure aerobic — no quality yet. Practice race-day gel strategy on the long run.'},
- {n:8,ph:'base',t:'Recovery',d:'3–9 Aug',v:44,lr:'16 km',
-  days:[['Mon','Easy','7 km','7:10'],['Tue','Easy','6 km','7:10'],['Wed','Easy','6 km','7:10'],['Thu','Easy','6 km','7:10'],['Fri','Rest','—','—'],['Sat','Long Run','16 km','7:10'],['Sun','Recovery jog','3 km','7:30–8:00']],
+ {n:8,ph:'base',t:'Recovery',d:'3–9 Aug',v:41,lr:'16 km',
+  days:[['Mon','Easy','7 km','7:10'],['Tue','Easy','6 km','7:10'],['Wed','Easy','6 km','7:10'],['Thu','Easy','6 km','7:10'],['Fri','Rest','—','—'],['Sat','Long Run','16 km','7:10'],['Sun','Strength (gym)','—','—']],
   note:'Planned down week — volume drops ~21%. Adaptation happens during rest.'},
- {n:9,ph:'build',t:'First Tempo',d:'10–16 Aug',v:58,lr:'20 km',
-  days:[['Mon','Easy','9 km','7:10'],['Tue','Easy','8 km','7:10'],['Wed','Tempo','8 km (2wu+4T+2cd)','5:15 T'],['Thu','Easy','7 km','7:10'],['Fri','Rest','—','—'],['Sat','Long Run','20 km','7:10'],['Sun','Recovery jog','6 km','7:30–8:00']],
+ {n:9,ph:'build',t:'First Tempo',d:'10–16 Aug',v:52,lr:'20 km',
+  days:[['Mon','Easy','9 km','7:10'],['Tue','Easy','8 km','7:10'],['Wed','Tempo','8 km (2wu+4T+2cd)','5:15 T'],['Thu','Easy','7 km','7:10'],['Fri','Rest','—','—'],['Sat','Long Run','20 km','7:10'],['Sun','Strength (gym)','—','—']],
   note:'First tempo. Comfortably hard, near HM effort — faster than marathon pace.'},
- {n:10,ph:'build',t:'MP Work + Speed Intro',d:'17–23 Aug',v:62,lr:'22 km (4 MP)',
-  days:[['Mon','Easy','9 km','7:10'],['Tue','Speed','8 km (5×1000m)','4:30'],['Wed','Easy','8 km','7:10'],['Thu','Easy','8 km','7:10'],['Fri','Rest','—','—'],['Sat','LR + MP finish','22 km (18E+4MP)','7:10→5:41'],['Sun','Recovery jog','7 km','very easy']],
+ {n:10,ph:'build',t:'MP Work + Speed Intro',d:'17–23 Aug',v:55,lr:'22 km (4 MP)',
+  days:[['Mon','Easy','9 km','7:10'],['Tue','Speed','8 km (5×1000m)','4:30'],['Wed','Easy','8 km','7:10'],['Thu','Easy','8 km','7:10'],['Fri','Rest','—','—'],['Sat','LR + MP finish','22 km (18E+4MP)','7:10→5:41'],['Sun','Strength (gym)','—','—']],
   note:'First marathon-pace exposure — 4 km at the end of the LR. Learn how 5:41/km feels on tired legs.'},
- {n:11,ph:'build',t:'Volume Climbs',d:'24–30 Aug',v:66,lr:'24 km',
-  days:[['Mon','Easy','11 km','7:10'],['Tue','Easy','7 km','7:10'],['Wed','Easy','8 km','7:10'],['Thu','Tempo','10 km (2wu+6T+2cd)','5:15'],['Fri','Rest','—','—'],['Sat','Long Run','24 km','7:10'],['Sun','Recovery jog','6 km','7:30–8:00']],
+ {n:11,ph:'build',t:'Volume Climbs',d:'24–30 Aug',v:60,lr:'24 km',
+  days:[['Mon','Easy','11 km','7:10'],['Tue','Easy','7 km','7:10'],['Wed','Easy','8 km','7:10'],['Thu','Tempo','10 km (2wu+6T+2cd)','5:15'],['Fri','Rest','—','—'],['Sat','Long Run','24 km','7:10'],['Sun','Strength (gym)','—','—']],
   note:'One quality session this week (tempo) — not two. Keep easy days truly easy.'},
- {n:12,ph:'build',t:'Recovery',d:'31 Aug–6 Sep',v:52,lr:'18 km',
-  days:[['Mon','Easy','8 km','7:10'],['Tue','Easy','6 km','7:10'],['Wed','Easy','6 km','7:10'],['Thu','Easy','7 km','7:10'],['Fri','Rest','—','—'],['Sat','Long Run','18 km','7:10'],['Sun','Recovery jog','7 km','7:30–8:00']],
+ {n:12,ph:'build',t:'Recovery',d:'31 Aug–6 Sep',v:45,lr:'18 km',
+  days:[['Mon','Easy','8 km','7:10'],['Tue','Easy','6 km','7:10'],['Wed','Easy','6 km','7:10'],['Thu','Easy','7 km','7:10'],['Fri','Rest','—','—'],['Sat','Long Run','18 km','7:10'],['Sun','Strength (gym)','—','—']],
   note:'Second down week. Honor the rest — adaptation is happening. Aim for 8+ hrs/night.'},
- {n:13,ph:'build',t:'Peak Building',d:'7–13 Sep',v:68,lr:'26 km (6 MP)',
-  days:[['Mon','Easy','10 km','7:10'],['Tue','Speed','8 km (4×1200m)','4:30'],['Wed','Easy','9 km','7:10'],['Thu','Easy','8 km','7:10'],['Fri','Rest','—','—'],['Sat','LR + MP finish','26 km (20E+6MP)','7:10→5:41'],['Sun','Recovery jog','7 km','7:30–8:00']],
+ {n:13,ph:'build',t:'Peak Building',d:'7–13 Sep',v:61,lr:'26 km (6 MP)',
+  days:[['Mon','Easy','10 km','7:10'],['Tue','Speed','8 km (4×1200m)','4:30'],['Wed','Easy','9 km','7:10'],['Thu','Easy','8 km','7:10'],['Fri','Rest','—','—'],['Sat','LR + MP finish','26 km (20E+6MP)','7:10→5:41'],['Sun','Strength (gym)','—','—']],
   note:'Speed Tue, MP block in LR Sat — no third quality day. Never run 20+ km fasted.'},
- {n:14,ph:'build',t:'Half-Marathon Tune-Up 🏃',d:'14–20 Sep',v:60,lr:'21.1 race',
-  days:[['Mon','Easy','11 km','7:10'],['Tue','Easy','9 km','7:10'],['Wed','Easy + strides','10 km (8E+6×100m)','7:10'],['Thu','Easy','6 km','7:10'],['Fri','Rest','—','—'],['Sat','HALF MARATHON RACE','21.1 km','5:24 target'],['Sun','Recovery jog','3 km','7:30–8:00']],
+ {n:14,ph:'build',t:'Half-Marathon Tune-Up 🏃',d:'14–20 Sep',v:57,lr:'21.1 race',
+  days:[['Mon','Easy','11 km','7:10'],['Tue','Easy','9 km','7:10'],['Wed','Easy + strides','10 km (8E+6×100m)','7:10'],['Thu','Easy','6 km','7:10'],['Fri','Rest','—','—'],['Sat','HALF MARATHON RACE','21.1 km','5:24 target'],['Sun','Strength (gym)','—','—']],
   note:'Sub-4 diagnostic. Target 5:24/km (1:54 HM ≈ 4:00 marathon). If it feels easy, sub-4 is on. If you struggle to break 1:57, recalibrate to 4:05. Same gels & shoes as race day.'},
  {n:15,ph:'peak',t:'Highest Mileage ⭐',d:'21–27 Sep',v:72,lr:'30 km (12 MP)',
   days:[['Mon','Easy','11 km','7:10'],['Tue','Easy','7 km','7:10'],['Wed','Easy','9 km','7:10'],['Thu','Tempo','10 km (2wu+6T+2cd)','5:15'],['Fri','Rest','—','—'],['Sat','Recovery jog','5 km','7:30–8:00'],['Sun','LR + MP block','30 km (18E+12MP)','7:10→5:41']],
   note:'Peak week. LR on Sunday gives 8 days recovery from the W14 half. The 12 km MP block inside 30 km is the marathon-specific peak workout. Nail this and sub-4 is on.'},
- {n:16,ph:'peak',t:'Recovery',d:'28 Sep–4 Oct',v:58,lr:'22 km',
-  days:[['Mon','Recovery jog','5 km','7:30–8:00'],['Tue','Easy','9 km','7:10'],['Wed','Easy','8 km','7:10'],['Thu','Easy','8 km','7:10'],['Fri','Rest','—','—'],['Sat','Long Run','22 km','7:10'],['Sun','Recovery jog','6 km','7:30–8:00']],
+ {n:16,ph:'peak',t:'Recovery',d:'28 Sep–4 Oct',v:52,lr:'22 km',
+  days:[['Mon','Recovery jog','5 km','7:30–8:00'],['Tue','Easy','9 km','7:10'],['Wed','Easy','8 km','7:10'],['Thu','Easy','8 km','7:10'],['Fri','Rest','—','—'],['Sat','Long Run','22 km','7:10'],['Sun','Strength (gym)','—','—']],
   note:'Recovery after peak. Mon is a true recovery jog after Sunday\'s 30 km. Do NOT skip the down week.'},
- {n:17,ph:'peak',t:'Final Peak',d:'5–11 Oct',v:70,lr:'30 km (12 MP)',
-  days:[['Mon','Easy','10 km','7:10'],['Tue','Easy','7 km','7:10'],['Wed','Easy','8 km','7:10'],['Thu','Tempo','11 km (2wu+7T+2cd)','5:15'],['Fri','Rest','—','—'],['Sat','LR finish at MP','30 km (18E+12MP)','7:10→5:41'],['Sun','Recovery jog','4 km','7:30–8:00']],
+ {n:17,ph:'peak',t:'Final Peak',d:'5–11 Oct',v:66,lr:'30 km (12 MP)',
+  days:[['Mon','Easy','10 km','7:10'],['Tue','Easy','7 km','7:10'],['Wed','Easy','8 km','7:10'],['Thu','Tempo','11 km (2wu+7T+2cd)','5:15'],['Fri','Rest','—','—'],['Sat','LR finish at MP','30 km (18E+12MP)','7:10→5:41'],['Sun','Strength (gym)','—','—']],
   note:'Last hard week. Race-simulation LR — the closing 12 km at MP rehearses the back half. Full nutrition rehearsal.'},
- {n:18,ph:'taper',t:'Taper Begins',d:'12–18 Oct',v:56,lr:'20 km',
-  days:[['Mon','Easy','8 km','7:10'],['Tue','Speed','7 km (5×800m)','4:30'],['Wed','Easy','8 km','7:10'],['Thu','Easy','8 km','7:10'],['Fri','Rest','—','—'],['Sat','Long Run','20 km','7:10'],['Sun','Recovery jog','5 km','7:30–8:00']],
+ {n:18,ph:'taper',t:'Taper Begins',d:'12–18 Oct',v:51,lr:'20 km',
+  days:[['Mon','Easy','8 km','7:10'],['Tue','Speed','7 km (5×800m)','4:30'],['Wed','Easy','8 km','7:10'],['Thu','Easy','8 km','7:10'],['Fri','Rest','—','—'],['Sat','Long Run','20 km','7:10'],['Sun','Strength (gym)','—','—']],
   note:'Taper week 1. Volume drops 20%. Taper madness is real and normal — trust the process.'},
- {n:19,ph:'taper',t:'Sharp Taper',d:'19–25 Oct',v:40,lr:'14 km (5 MP)',
-  days:[['Mon','Easy','7 km','7:10'],['Tue','Speed','6 km (4×400m)','4:00'],['Wed','Easy','6 km','7:10'],['Thu','Easy','5 km','7:10'],['Fri','Rest','—','—'],['Sat','MP sharpener','14 km (9E+5MP)','7:10→5:41'],['Sun','Recovery jog','2 km','7:30–8:00']],
+ {n:19,ph:'taper',t:'Sharp Taper',d:'19–25 Oct',v:38,lr:'14 km (5 MP)',
+  days:[['Mon','Easy','7 km','7:10'],['Tue','Speed','6 km (4×400m)','4:00'],['Wed','Easy','6 km','7:10'],['Thu','Easy','5 km','7:10'],['Fri','Rest','—','—'],['Sat','MP sharpener','14 km (9E+5MP)','7:10→5:41'],['Sun','Strength (gym)','—','—']],
   note:'Volume drops sharply. Short MP block keeps legs sharp without fatigue. Full carbo-load. Do not add km.'},
  {n:20,ph:'race',t:'Race Week 🏁',d:'26 Oct–1 Nov',v:57,lr:'42.2 RACE',
   days:[['Mon','Easy','5 km','7:10'],['Tue','Easy + strides','5 km (4E+4×100m)','7:10'],['Wed','Easy','4 km','7:10'],['Thu','Rest','—','—'],['Fri','Easy shakeout','3 km','7:10'],['Sat','Pre-race walk + strides','2 km + 4×100m','7:10'],['Sun','🏁 RACE — The Hague Marathon','42.2 km','5:41']],
