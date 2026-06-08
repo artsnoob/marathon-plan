@@ -129,7 +129,7 @@
     <div class="card"><div class="v">72 km</div><div class="k">Peak week (W15)</div></div>
     <div class="card"><div class="v">~51 km</div><div class="k">Weekly average</div></div>
     <div class="card"><div class="v">5 days</div><div class="k">Run frequency</div></div>
-    <div class="card"><div class="v">4:07</div><div class="k">Current Garmin pred.</div></div>
+    <div class="card"><div class="v">~3:56</div><div class="k">Projected (real races)</div></div>
   </div>
 
   <h2>Goal Paces</h2>
@@ -140,9 +140,10 @@
     <tr><td>Long Run</td><td>7:10</td><td>11:32</td><td>Conversational</td></tr>
     <tr><td>Recovery jog</td><td>7:30–8:00</td><td>12:04–12:52</td><td>Shuffle pace, readiness-gated</td></tr>
     <tr><td><b>Tempo</b></td><td class="pace-hi">5:15</td><td>8:27</td><td>Just under HM effort</td></tr>
-    <tr><td>Speed (5–10K)</td><td>4:30</td><td>7:14</td><td>Intervals</td></tr>
+    <tr><td>Speed (5K reps)</td><td>4:50 → 4:35</td><td>7:46 → 7:23</td><td>~5K pace, faster as fitness builds</td></tr>
+    <tr><td>Speed (400m)</td><td>4:10</td><td>6:42</td><td>Short reps, full recovery</td></tr>
   </table>
-  <p class="hint">Garmin calibration: VO2 max 46.8 · 5K 20:46 · 10K 47:00 · HM 1:49:10 · Marathon 4:07</p>
+  <p class="hint">Calibrated off actual races: <b>5K 24:34</b> (4:55/km, 19 Apr) · <b>10K 51:27</b> (5:08/km, 31 May) → Riegel-projects to ~3:55–3:57 marathon. ⚠️ Garmin predictions (VO2max 47 · 5K 20:46 / 10K 46:43 / HM 1:48 / Mara 4:04) run ~10–15% hot — not used for pacing.</p>
 
   <h2>Weekly Build</h2>
   <div class="legend">
@@ -214,7 +215,7 @@ var weeks = [
   days:[['Mon','Easy','9 km','7:10'],['Tue','Easy','8 km','7:10'],['Wed','Tempo','8 km (2wu+4T+2cd)','5:15 T'],['Thu','Easy','7 km','7:10'],['Fri','Rest','—','—'],['Sat','Long Run','20 km','7:10'],['Sun','Strength (gym)','—','—']],
   note:'First tempo. Comfortably hard, near HM effort — faster than marathon pace.'},
  {n:10,ph:'build',t:'MP Work + Speed Intro',d:'17–23 Aug',v:55,lr:'22 km (4 MP)',
-  days:[['Mon','Easy','9 km','7:10'],['Tue','Speed','8 km (5×1000m)','4:30'],['Wed','Easy','8 km','7:10'],['Thu','Easy','8 km','7:10'],['Fri','Rest','—','—'],['Sat','LR + MP finish','22 km (18E+4MP)','7:10→5:41'],['Sun','Strength (gym)','—','—']],
+  days:[['Mon','Easy','9 km','7:10'],['Tue','Speed','8 km (5×1000m)','4:50'],['Wed','Easy','8 km','7:10'],['Thu','Easy','8 km','7:10'],['Fri','Rest','—','—'],['Sat','LR + MP finish','22 km (18E+4MP)','7:10→5:41'],['Sun','Strength (gym)','—','—']],
   note:'First marathon-pace exposure — 4 km at the end of the LR. Learn how 5:41/km feels on tired legs.'},
  {n:11,ph:'build',t:'Volume Climbs',d:'24–30 Aug',v:60,lr:'24 km',
   days:[['Mon','Easy','11 km','7:10'],['Tue','Easy','7 km','7:10'],['Wed','Easy','8 km','7:10'],['Thu','Tempo','10 km (2wu+6T+2cd)','5:15'],['Fri','Rest','—','—'],['Sat','Long Run','24 km','7:10'],['Sun','Strength (gym)','—','—']],
@@ -223,7 +224,7 @@ var weeks = [
   days:[['Mon','Easy','8 km','7:10'],['Tue','Easy','6 km','7:10'],['Wed','Easy','6 km','7:10'],['Thu','Easy','7 km','7:10'],['Fri','Rest','—','—'],['Sat','Long Run','18 km','7:10'],['Sun','Strength (gym)','—','—']],
   note:'Second down week. Honor the rest — adaptation is happening. Aim for 8+ hrs/night.'},
  {n:13,ph:'build',t:'Peak Building',d:'7–13 Sep',v:61,lr:'26 km (6 MP)',
-  days:[['Mon','Easy','10 km','7:10'],['Tue','Speed','8 km (4×1200m)','4:30'],['Wed','Easy','9 km','7:10'],['Thu','Easy','8 km','7:10'],['Fri','Rest','—','—'],['Sat','LR + MP finish','26 km (20E+6MP)','7:10→5:41'],['Sun','Strength (gym)','—','—']],
+  days:[['Mon','Easy','10 km','7:10'],['Tue','Speed','8 km (4×1200m)','4:45'],['Wed','Easy','9 km','7:10'],['Thu','Easy','8 km','7:10'],['Fri','Rest','—','—'],['Sat','LR + MP finish','26 km (20E+6MP)','7:10→5:41'],['Sun','Strength (gym)','—','—']],
   note:'Speed Tue, MP block in LR Sat — no third quality day. Never run 20+ km fasted.'},
  {n:14,ph:'build',t:'Half-Marathon Tune-Up 🏃',d:'14–20 Sep',v:57,lr:'21.1 race',
   days:[['Mon','Easy','11 km','7:10'],['Tue','Easy','9 km','7:10'],['Wed','Easy + strides','10 km (8E+6×100m)','7:10'],['Thu','Easy','6 km','7:10'],['Fri','Rest','—','—'],['Sat','HALF MARATHON RACE','21.1 km','5:24 target'],['Sun','Strength (gym)','—','—']],
@@ -238,10 +239,10 @@ var weeks = [
   days:[['Mon','Easy','10 km','7:10'],['Tue','Easy','7 km','7:10'],['Wed','Easy','8 km','7:10'],['Thu','Tempo','11 km (2wu+7T+2cd)','5:15'],['Fri','Rest','—','—'],['Sat','LR finish at MP','30 km (18E+12MP)','7:10→5:41'],['Sun','Strength (gym)','—','—']],
   note:'Last hard week. Race-simulation LR — the closing 12 km at MP rehearses the back half. Full nutrition rehearsal.'},
  {n:18,ph:'taper',t:'Taper Begins',d:'12–18 Oct',v:51,lr:'20 km',
-  days:[['Mon','Easy','8 km','7:10'],['Tue','Speed','7 km (5×800m)','4:30'],['Wed','Easy','8 km','7:10'],['Thu','Easy','8 km','7:10'],['Fri','Rest','—','—'],['Sat','Long Run','20 km','7:10'],['Sun','Strength (gym)','—','—']],
+  days:[['Mon','Easy','8 km','7:10'],['Tue','Speed','7 km (5×800m)','4:40'],['Wed','Easy','8 km','7:10'],['Thu','Easy','8 km','7:10'],['Fri','Rest','—','—'],['Sat','Long Run','20 km','7:10'],['Sun','Strength (gym)','—','—']],
   note:'Taper week 1. Volume drops 20%. Taper madness is real and normal — trust the process.'},
  {n:19,ph:'taper',t:'Sharp Taper',d:'19–25 Oct',v:38,lr:'14 km (5 MP)',
-  days:[['Mon','Easy','7 km','7:10'],['Tue','Speed','6 km (4×400m)','4:00'],['Wed','Easy','6 km','7:10'],['Thu','Easy','5 km','7:10'],['Fri','Rest','—','—'],['Sat','MP sharpener','14 km (9E+5MP)','7:10→5:41'],['Sun','Strength (gym)','—','—']],
+  days:[['Mon','Easy','7 km','7:10'],['Tue','Speed','6 km (4×400m)','4:10'],['Wed','Easy','6 km','7:10'],['Thu','Easy','5 km','7:10'],['Fri','Rest','—','—'],['Sat','MP sharpener','14 km (9E+5MP)','7:10→5:41'],['Sun','Strength (gym)','—','—']],
   note:'Volume drops sharply. Short MP block keeps legs sharp without fatigue. Full carbo-load. Do not add km.'},
  {n:20,ph:'race',t:'Race Week 🏁',d:'26 Oct–1 Nov',v:57,lr:'42.2 RACE',
   days:[['Mon','Easy','5 km','7:10'],['Tue','Easy + strides','5 km (4E+4×100m)','7:10'],['Wed','Easy','4 km','7:10'],['Thu','Rest','—','—'],['Fri','Easy shakeout','3 km','7:10'],['Sat','Pre-race walk + strides','2 km + 4×100m','7:10'],['Sun','🏁 RACE — The Hague Marathon','42.2 km','5:41']],
